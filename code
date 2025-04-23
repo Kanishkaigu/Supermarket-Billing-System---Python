@@ -1,0 +1,95 @@
+products = {
+    "Shampoo": 100,
+    "Toothpaste": 50,
+    "Detergent": 150,
+    "Dish Soap": 40,
+    "Paper Towels": 30,
+    "Apple": 60,
+    "Hand Soap": 20,
+    "Chocolate": 70,
+    "Soda": 50,
+    "Chips": 30,
+    "Butter": 80,
+    "Yogurt": 40,
+    "Coffee": 100,
+    "Tea": 90,
+    "Sugar": 60,
+    "Salt": 20,
+    "Pepper": 30,
+    "Juice": 50,
+    "Cookies": 40,
+    "Canned Beans": 30
+}
+
+from datetime import datetime
+
+
+while True :
+    amount = 0
+    cart = {}
+    name = input("Enter your name : ")
+    ph_no = int(input("Enter your ph_no : "))
+    print("-" * 60)
+    print("Choose items from the list : ")
+    for i,j in products.items() : 
+        print(f"{i:<20} - {j:>10}")
+
+    print("-" * 60)
+    while True : 
+        qty = float(input("Enter quantity : "))
+        while True :
+            prod_name = input("Enter Product name : ").title()
+            if prod_name not in products : 
+                print("Please enter the correct spelling!!")
+            else :
+                break
+        amount += qty * products[prod_name]
+        cart[prod_name] = products[prod_name],"x",qty
+        repeat_item = input("Do you want to add more items ? (yes/no) : ").lower()
+        if repeat_item in ["no", "n"] :
+            break
+
+
+    discount = 0
+    if amount <= 500 :
+        discount = 0.05
+    elif amount <= 1000 :
+        discount = 0.07
+    elif amount <= 5000 :
+        discount = 0.15
+    else :
+        discount = 0.2 
+    actual_amt = amount - amount*discount
+
+    print("\n")
+    print("-" * 60)
+    print("-" * 60)
+
+    print("GROCERY STORE XYZ".center(50))
+    print(f"Date: {datetime.now().strftime('%d-%m-%Y')}  Time: {datetime.now().strftime('%H:%M:%S')}".center(50))
+    print("123 Rose street, New Delhi, Phone : 123-456-789".center(50))
+    print("-" * 60)
+    print("-" * 60)
+    
+    print("Customer name    :    ",name)
+    print("Phone no         :    ", ph_no)
+    print("-" * 40)
+    for i,j in cart.items() :
+        product,x,quantity = j
+        print(f"{i:<15} {product:>5} {x:^5} {quantity:<5}")
+    print("-" * 40)
+    
+    print("Total bill         : ", "₹",amount)
+    print("Discount Applied   : ", discount*100,"%OFF")
+    print("Final bill         : ", "₹",actual_amt)
+    print("-"*60)
+
+    print("\n")
+    print("Thankyou for Shopping with us :)".center(50))
+    print("\n")
+    print("-"*60)
+    print("-"*60)
+    print("\n")
+    next_person = input("Is there a next person in the queue ? (yes/no) : ").lower()
+    if next_person in ["no", "n"]:
+        break
